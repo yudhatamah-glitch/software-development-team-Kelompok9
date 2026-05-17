@@ -4,7 +4,7 @@
 <h1 class="text-3xl font-bold mb-6">Data Barang</h1>
 
 <!-- Tombol Tambah Barang -->
-<a href="/tambah" class="bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-blue-700">
+<a href="/admin/tambah" class="bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-blue-700">
     + Tambah Barang
 </a>
 
