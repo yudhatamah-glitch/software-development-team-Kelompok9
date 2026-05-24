@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="ml-8 mt-1 p-2">
+
 <h1 class="text-3xl font-bold mb-6">Tambah Penghuni</h1>
 
 <form class="bg-white p-6 rounded-2xl shadow max-w-lg">
@@ -25,4 +28,7 @@
     </button>
 
 </form>
+
+</div>
+
 @endsection
