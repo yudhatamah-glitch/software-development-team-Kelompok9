@@ -1,184 +1,413 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Indekos</title>
+    <title>Indekos App</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head><script src="https://unpkg.com/lucide@latest"></script>
-<body class="bg-gradient-to-br from-blue-50 via-white to-indigo-100 min-h-screen">
-    <!-- Background dekor -->
-<div class="fixed inset-0 -z-10">
-    <div class="absolute top-0 left-0 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-    <div class="absolute top-20 right-0 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-    <div class="absolute bottom-0 left-1/2 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        .glass {
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .kamar-card {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.55);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .kamar-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(99,102,241,0.18);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-booking {
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+        .btn-booking:hover { opacity: 0.88; transform: scale(0.99); }
+
+        .nav-glass {
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        .facility-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(99,102,241,0.08);
+            color: #4f46e5;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        #dropdownLogin {
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(16px);
+            background: rgba(255,255,255,0.92);
+        }
+    </style>
+</head>
+
+<body style="background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 40%, #faf5ff 70%, #e8f5e9 100%); min-height: 100vh;">
+
+{{-- Background orbs --}}
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="orb w-96 h-96 bg-blue-400" style="top:-60px;left:-80px;"></div>
+    <div class="orb w-80 h-80 bg-violet-400" style="top:80px;right:-60px;"></div>
+    <div class="orb w-72 h-72 bg-indigo-300" style="bottom:120px;left:30%;"></div>
+    <div class="orb w-64 h-64 bg-emerald-300" style="bottom:-40px;right:10%;"></div>
 </div>
 
-<!-- Navbar -->
-<nav class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold">🏠 Indekos App</h1>
-        <div class="relative">
-    <button onclick="toggleDropdown()" class="bg-white text-blue-600 px-4 py-1 rounded hover:bg-gray-100">
-        Login ▼
-    </button>
+{{-- Navbar --}}
+<nav class="nav-glass sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-5 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div style="width:34px;height:34px;background:linear-gradient(135deg,#6366f1,#818cf8);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <svg fill="none" stroke="white" viewBox="0 0 24 24" width="18" height="18">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/>
+                </svg>
+            </div>
+            <span style="font-size:16px;font-weight:800;background:linear-gradient(90deg,#4f46e5,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Indekos App</span>
+        </div>
 
-    <div id="dropdownLogin" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg overflow-hidden">
-        <a href="/login-admin" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-    Admin
+        <a href="/login"
+   style="background:linear-gradient(135deg,#6366f1,#818cf8);color:white;padding:8px 20px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:6px;">
+    
+    Login
+
 </a>
-
-<a href="/login-user" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-    Penghuni
-</a>
-    </div>
-</div>
-
-<script>
-function toggleDropdown() {
-    document.getElementById('dropdownLogin').classList.toggle('hidden');
-}
-</script>
     </div>
 </nav>
 
-<!-- Hero -->
-<div class="max-w-7xl mx-auto p-6">
-    <h2 class="text-4xl font-extrabold mb-2 text-gray-800">Cari Kos Nyaman & Murah</h2>
-    <p class="text-gray-600 mb-6 text-lg">Temukan kamar terbaik untuk Anda</p>
+{{-- Hero --}}
+<div class="max-w-6xl mx-auto px-5 pt-14 pb-6">
 
-    <!-- List Kamar -->
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="glass rounded-3xl px-8 py-10 mb-10" style="background:rgba(255,255,255,0.45);">
+        <span class="badge" style="background:rgba(99,102,241,0.12);color:#4f46e5;">✦ Platform Indekos Terpercaya</span>
+        <h2 style="font-size:36px;font-weight:800;color:#1e1b4b;margin-top:14px;line-height:1.2;">
+            Cari Kos Nyaman<br>
+            <span style="background:linear-gradient(90deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">&amp; Murah</span>
+        </h2>
+        <p style="color:#6b7280;font-size:15px;margin-top:10px;max-width:440px;line-height:1.7;">
+            Temukan kamar terbaik yang sesuai kebutuhan Anda — nyaman, aman, dan terjangkau.
+        </p>
 
-        <!-- Kamar 1 -->
-        <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition duration-300 overflow-hidden border border-white/30">
-            <img src="{{ asset('images/kamar1.jpg') }}" class="w-full h-40 object-cover">
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+            <div class="glass" style="padding:10px 18px;border-radius:12px;display:flex;align-items:center;gap:8px;">
+                <span style="font-size:18px;">🏠</span>
+                <div>
+                    <p style="font-size:11px;color:#9ca3af;line-height:1;">Kamar tersedia</p>
+                    <p style="font-size:15px;font-weight:700;color:#1e1b4b;">3 Unit</p>
+                </div>
+            </div>
+            <div class="glass" style="padding:10px 18px;border-radius:12px;display:flex;align-items:center;gap:8px;">
+                <span style="font-size:18px;">⭐</span>
+                <div>
+                    <p style="font-size:11px;color:#9ca3af;line-height:1;">Rating</p>
+                    <p style="font-size:15px;font-weight:700;color:#1e1b4b;">4.9 / 5</p>
+                </div>
+            </div>
+            <div class="glass" style="padding:10px 18px;border-radius:12px;display:flex;align-items:center;gap:8px;">
+                <span style="font-size:18px;">👥</span>
+                <div>
+                    <p style="font-size:11px;color:#9ca3af;line-height:1;">Penghuni aktif</p>
+                    <p style="font-size:15px;font-weight:700;color:#1e1b4b;">12 Orang</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <div class="p-4">
-                <h3 class="text-lg font-bold">Kamar A1</h3>
-                <p class="text-gray-500 text-sm mb-2">Nyaman & strategis</p>
+    {{-- Kamar Cards --}}
+    <h3 style="font-size:17px;font-weight:700;color:#374151;margin-bottom:16px;padding-left:2px;">Kamar Tersedia</h3>
+    <div class="grid md:grid-cols-3 gap-5">
 
-                <p class="text-blue-600 font-bold text-xl mb-2">Rp 350.000 / bulan</p>
-
-                <ul class="text-sm text-gray-600 mb-3 space-y-1">
-                    <li>✔ WiFi</li>
-                    <li>✔ Kamar mandi dalam</li>
-                    <li>✔ AC</li>
-                </ul>
-
-                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                    Booking
+        {{-- Kamar 1 --}}
+        <div class="kamar-card">
+            <div style="position:relative;">
+                <img src="{{ asset('images/kamar1.jpg') }}" class="w-full h-44 object-cover">
+                <div style="position:absolute;top:10px;left:10px;">
+                    <span class="badge" style="background:rgba(99,102,241,0.85);color:white;">Populer</span>
+                </div>
+                <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top, rgba(0,0,0,0.35), transparent);"></div>
+            </div>
+            <div style="padding:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                    <div>
+                        <h3 style="font-size:16px;font-weight:700;color:#1e1b4b;">Kamar A1</h3>
+                        <p style="font-size:12px;color:#9ca3af;">Nyaman &amp; strategis</p>
+                    </div>
+                    <p style="font-size:16px;font-weight:800;color:#6366f1;">Rp 350rb<span style="font-size:11px;font-weight:500;color:#9ca3af;">/bln</span></p>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 14px;">
+                    <span class="facility-tag">📶 WiFi</span>
+                    <span class="facility-tag">🚿 KM Dalam</span>
+                    <span class="facility-tag">❄️ AC</span>
+                </div>
+                <button class="btn-booking" style="background:#6074dd;color:white;">
+                    Booking Sekarang
                 </button>
             </div>
         </div>
 
-        <!-- Kamar 2 -->
-        <div class="bg-white rounded-2xl shadow hover:shadow-lg hover:scale-105 transition overflow-hidden">
-            <img src="{{ asset('images/kamar2.jpg') }}" class="w-full h-40 object-cover">
-
-            <div class="p-4">
-                <h3 class="text-lg font-bold">Kamar A2</h3>
-                <p class="text-gray-500 text-sm mb-2">Minimalis & bersih</p>
-
-                <p class="text-green-600 font-bold text-xl mb-2">Rp 500.000 / bulan</p>
-
-                <ul class="text-sm text-gray-600 mb-3 space-y-1">
-                    <li>✔ WiFi</li>
-                    <li>✔ Kipas angin</li>
-                    <li>✔ Lemari</li>
-                </ul>
-
-                <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
-                    Booking
+        {{-- Kamar 2 --}}
+        <div class="kamar-card">
+            <div style="position:relative;">
+                <img src="{{ asset('images/kamar2.jpg') }}" class="w-full h-44 object-cover">
+                <div style="position:absolute;top:10px;left:10px;">
+                    <span class="badge" style="background:rgba(48, 184, 86, 0.85);color:white;">Tersedia</span>
+                </div>
+                <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top, rgba(0,0,0,0.35), transparent);"></div>
+            </div>
+            <div style="padding:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                    <div>
+                        <h3 style="font-size:16px;font-weight:700;color:#1e1b4b;">Kamar A2</h3>
+                        <p style="font-size:12px;color:#9ca3af;">Minimalis &amp; bersih</p>
+                    </div>
+                    <p style="font-size:16px;font-weight:800;color:#10b981;">Rp 500rb<span style="font-size:11px;font-weight:500;color:#9ca3af;">/bln</span></p>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 14px;">
+                    <span class="facility-tag" style="background:rgba(16,185,129,0.08);color:#059669;">📶 WiFi</span>
+                    <span class="facility-tag" style="background:rgba(16,185,129,0.08);color:#059669;">🌀 Kipas</span>
+                    <span class="facility-tag" style="background:rgba(16,185,129,0.08);color:#059669;">🗄️ Lemari</span>
+                </div>
+                <button class="btn-booking" style="background:#6074dd;color:white;">
+                    Booking Sekarang
                 </button>
             </div>
         </div>
 
-        <!-- Kamar 3 -->
-        <div class="bg-white rounded-2xl shadow hover:shadow-lg hover:scale-105 transition overflow-hidden">
-            <img src="{{ asset('images/kamar3.jpg') }}" class="w-full h-40 object-cover">
-
-            <div class="p-4">
-                <h3 class="text-lg font-bold">Kamar A3</h3>
-                <p class="text-gray-500 text-sm mb-2">Premium & luas</p>
-
-                <p class="text-red-500 font-bold text-xl mb-2">Rp 750.000 / bulan</p>
-
-                <ul class="text-sm text-gray-600 mb-3 space-y-1">
-                    <li>✔ WiFi</li>
-                    <li>✔ AC</li>
-                    <li>✔ TV + Kulkas</li>
-                </ul>
-
-                <button class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">
-                    Booking
+        {{-- Kamar 3 --}}
+        <div class="kamar-card">
+            <div style="position:relative;">
+                <img src="{{ asset('images/kamar3.jpg') }}" class="w-full h-44 object-cover">
+                <div style="position:absolute;top:10px;left:10px;">
+                    <span class="badge" style="background:rgba(245,158,11,0.85);color:white;">Premium</span>
+                </div>
+                <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top, rgba(0,0,0,0.35), transparent);"></div>
+            </div>
+            <div style="padding:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                    <div>
+                        <h3 style="font-size:16px;font-weight:700;color:#1e1b4b;">Kamar A3</h3>
+                        <p style="font-size:12px;color:#9ca3af;">Premium &amp; luas</p>
+                    </div>
+                    <p style="font-size:16px;font-weight:800;color:#f59e0b;">Rp 750rb<span style="font-size:11px;font-weight:500;color:#9ca3af;">/bln</span></p>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 14px;">
+                    <span class="facility-tag" style="background:rgba(245,158,11,0.08);color:#d97706;">📶 WiFi</span>
+                    <span class="facility-tag" style="background:rgba(245,158,11,0.08);color:#d97706;">❄️ AC</span>
+                    <span class="facility-tag" style="background:rgba(245,158,11,0.08);color:#d97706;">📺 TV + Kulkas</span>
+                </div>
+                <button class="btn-booking" style="background:#6074dd;color:white;">
+                    Booking Sekarang
                 </button>
             </div>
         </div>
 
     </div>
+
+    {{-- Tombol lebih banyak --}}
+    <div style="text-align:center;margin-top:18px;">
+        <button onclick="toggleKamarLain()" id="btnLebihBanyak"
+            style="display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:#6366f1;padding:6px 14px;border-radius:20px;transition:background 0.2s;"
+            onmouseover="this.style.background='rgba(99,102,241,0.08)'"
+            onmouseout="this.style.background='none'">
+            <span id="btnLebihBanyakText">Lebih banyak</span>
+            <svg id="btnChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="15" height="15" style="transition:transform 0.3s;">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </button>
+    </div>
+
+    {{-- Kamar tambahan (tersembunyi) --}}
+    <div id="kamarTambahan" style="overflow:hidden;max-height:0;transition:max-height 0.5s ease, opacity 0.4s ease;opacity:0;">
+        <div class="grid md:grid-cols-3 gap-5" style="margin-top:20px;">
+
+            {{-- Kamar B1 --}}
+            <div class="kamar-card">
+                <div style="position:relative;">
+                    <img src="{{ asset('images/kamar4.jpg') }}" class="w-full h-44 object-cover">
+                    <div style="position:absolute;top:10px;left:10px;">
+                        <span class="badge" style="background:rgba(48, 184, 86, 0.85);color:white;">Tersedia</span>
+                    </div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top, rgba(0,0,0,0.35), transparent);"></div>
+                </div>
+                <div style="padding:16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                        <div>
+                            <h3 style="font-size:16px;font-weight:700;color:#1e1b4b;">Kamar B1</h3>
+                            <p style="font-size:12px;color:#9ca3af;">Tenang &amp; sejuk</p>
+                        </div>
+                        <p style="font-size:16px;font-weight:800;color:#6366f1;">Rp 400rb<span style="font-size:11px;font-weight:500;color:#9ca3af;">/bln</span></p>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 14px;">
+                        <span class="facility-tag">📶 WiFi</span>
+                        <span class="facility-tag">🚿 KM Dalam</span>
+                        <span class="facility-tag">🌀 Kipas</span>
+                    </div>
+                    <button class="btn-booking" style="background:#6074dd;color:white;">
+                        Booking Sekarang
+                    </button>
+                </div>
+            </div>
+
+            {{-- Kamar B2 --}}
+            <div class="kamar-card">
+                <div style="position:relative;">
+                    <img src="{{ asset('images/kamar5.jpg') }}" class="w-full h-44 object-cover">
+                    <div style="position:absolute;top:10px;left:10px;">
+                        <span class="badge" style="background:rgba(48, 184, 86, 0.85);color:white;">Tersedia</span>
+                    </div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top, rgba(0,0,0,0.35), transparent);"></div>
+                </div>
+                <div style="padding:16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                        <div>
+                            <h3 style="font-size:16px;font-weight:700;color:#1e1b4b;">Kamar B2</h3>
+                            <p style="font-size:12px;color:#9ca3af;">Luas &amp; nyaman</p>
+                        </div>
+                        <p style="font-size:16px;font-weight:800;color:#10b981;">Rp 450rb<span style="font-size:11px;font-weight:500;color:#9ca3af;">/bln</span></p>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 14px;">
+                        <span class="facility-tag" style="background:rgba(16,185,129,0.08);color:#059669;">📶 WiFi</span>
+                        <span class="facility-tag" style="background:rgba(16,185,129,0.08);color:#059669;">🗄️ Lemari</span>
+                        <span class="facility-tag" style="background:rgba(16,185,129,0.08);color:#059669;">🪑 Meja Belajar</span>
+                    </div>
+                    <button class="btn-booking" style="background:#6074dd;color:white;">
+                        Booking Sekarang
+                    </button>
+                </div>
+            </div>
+
+            {{-- Kamar B3 --}}
+            <div class="kamar-card">
+                <div style="position:relative;">
+                    <img src="{{ asset('images/kamar6.jpg') }}" class="w-full h-44 object-cover">
+                    <div style="position:absolute;top:10px;left:10px;">
+                        <span class="badge" style="background:rgba(245,158,11,0.85);color:white;">Baru</span>
+                    </div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top, rgba(0,0,0,0.35), transparent);"></div>
+                </div>
+                <div style="padding:16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                        <div>
+                            <h3 style="font-size:16px;font-weight:700;color:#1e1b4b;">Kamar B3</h3>
+                            <p style="font-size:12px;color:#9ca3af;">Eksklusif &amp; modern</p>
+                        </div>
+                        <p style="font-size:16px;font-weight:800;color:#f59e0b;">Rp 650rb<span style="font-size:11px;font-weight:500;color:#9ca3af;">/bln</span></p>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 14px;">
+                        <span class="facility-tag" style="background:rgba(245,158,11,0.08);color:#d97706;">📶 WiFi</span>
+                        <span class="facility-tag" style="background:rgba(245,158,11,0.08);color:#d97706;">❄️ AC</span>
+                        <span class="facility-tag" style="background:rgba(245,158,11,0.08);color:#d97706;">🛁 KM Pribadi</span>
+                    </div>
+                    <button class="btn-booking" style="background:#6074dd;color:white;">
+                        Booking Sekarang
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
-<!-- FOOTER -->
-<footer class="bg-gray-900 text-gray-300 mt-16">
-    <div class="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
+{{-- Footer --}}
+<footer style="background:rgba(15,23,42,0.95);backdrop-filter:blur(20px);margin-top:60px;border-top:1px solid rgba(255,255,255,0.08);">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
 
-        <!-- Tentang -->
         <div>
-            <h2 class="text-white font-bold text-lg mb-3">Profil Singkat</h2>
-            <p class="text-sm leading-relaxed">
-                Indekos App memanfaatkan teknologi untuk membantu calon anak kos mencari, memilih, dan booking kos dengan lebih mudah.
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                <div style="width:30px;height:30px;background:linear-gradient(135deg,#6366f1,#818cf8);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                    <svg fill="none" stroke="white" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
+                </div>
+                <span style="color:white;font-weight:700;font-size:15px;">Indekos App</span>
+            </div>
+            <p style="color:#9ca3af;font-size:13px;line-height:1.8;">
+                Platform modern untuk mencari, memilih, dan booking kos dengan lebih mudah dan terpercaya.
             </p>
         </div>
 
-        <!-- Hubungi Kami -->
         <div>
-            <h2 class="text-white font-semibold mb-3">Hubungi Kami</h2>
-
-            <ul class="space-y-3 text-sm">
-
+            <h2 style="color:white;font-weight:600;font-size:14px;margin-bottom:14px;">Hubungi Kami</h2>
+            <ul style="display:flex;flex-direction:column;gap:10px;">
                 <li>
-                    <a href="#" class="flex items-center gap-2 hover:text-white">
-                        <i data-lucide="phone" class="w-4 h-4"></i>
-                        📞(+62) 858-9561-9022
+                    <a href="#" style="color:#9ca3af;font-size:13px;display:flex;align-items:center;gap:8px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                        <i data-lucide="phone" style="width:15px;height:15px;"></i>
+                        (+62) 858-9561-9022
                     </a>
                 </li>
-
                 <li>
-                    <a href="#" class="flex items-center gap-2 hover:text-white">
-                        <i data-lucide="mail" class="w-4 h-4"></i>
-                        📧Email @indekosapp.com
+                    <a href="#" style="color:#9ca3af;font-size:13px;display:flex;align-items:center;gap:8px;text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                        <i data-lucide="mail" style="width:15px;height:15px;"></i>
+                        Email @indekosapp.com
                     </a>
                 </li>
-
                 <li>
-                    <a href="#" class="flex items-center gap-2 hover:text-white">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
-                        📸Instagram IndekosApp
+                    <a href="#" style="color:#9ca3af;font-size:13px;display:flex;align-items:center;gap:8px;text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                        <i data-lucide="instagram" style="width:15px;height:15px;"></i>
+                        Instagram IndekosApp
                     </a>
                 </li>
-
                 <li>
-                    <a href="#" class="flex items-center gap-2 hover:text-white">
-                        <i data-lucide="facebook" class="w-4 h-4"></i>
-                        📘Facebook KosApp
+                    <a href="#" style="color:#9ca3af;font-size:13px;display:flex;align-items:center;gap:8px;text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                        <i data-lucide="facebook" style="width:15px;height:15px;"></i>
+                        Facebook KosApp
                     </a>
                 </li>
-
             </ul>
         </div>
 
-        <!-- Kontak + MAP -->
         <div>
-            <h2 class="text-white font-semibold mb-3">Lokasi</h2>
-
-            <p class="text-sm mb-3">📍 Jl. Margo Tani No.48, Sukorame, Kec. Kota, Kota Kediri, Jawa Timur 64114</p>
-
-            <div class="rounded-lg overflow-hidden border border-gray-700">
-                <iframe 
+            <h2 style="color:white;font-weight:600;font-size:14px;margin-bottom:14px;">Lokasi Kami</h2>
+            <p style="color:#9ca3af;font-size:12px;margin-bottom:10px;line-height:1.7;">
+                📍 Jl. Margo Tani No.48, Sukorame, Kec. Kota, Kota Kediri, Jawa Timur 64114
+            </p>
+            <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);">
+                <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d376.3683145595258!2d111.98838904569097!3d-7.807565691752693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7857fe0a451ee3%3A0x90d1f10c4556ad40!2sKos%20Sugeng%20Tipe%20A%20Mojoroto%20Kediri!5e1!3m2!1sid!2sid!4v1776929097145!5m2!1sid!2sid"
-                    width="100%" 
-                    height="180"
-                    style="border:0; display:block;"
+                    width="100%"
+                    height="160"
+                    style="border:0;display:block;"
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
@@ -187,8 +416,33 @@ function toggleDropdown() {
 
     </div>
 
-    <!-- Bottom -->
-    <div class="border-t border-gray-700 text-center py-4 text-sm text-gray-400">
+    <div style="border-top:1px solid rgba(255,255,255,0.08);text-align:center;padding:14px;font-size:12px;color:#6b7280;">
         © 2026 Indekos App. All rights reserved.
     </div>
 </footer>
+
+<script>
+
+var kamarTerbuka = false;
+function toggleKamarLain() {
+    var el = document.getElementById('kamarTambahan');
+    var chevron = document.getElementById('btnChevron');
+    var label = document.getElementById('btnLebihBanyakText');
+    kamarTerbuka = !kamarTerbuka;
+    if (kamarTerbuka) {
+        el.style.maxHeight = el.scrollHeight + 'px';
+        el.style.opacity = '1';
+        chevron.style.transform = 'rotate(180deg)';
+        label.textContent = 'Lebih sedikit';
+    } else {
+        el.style.maxHeight = '0';
+        el.style.opacity = '0';
+        chevron.style.transform = 'rotate(0deg)';
+        label.textContent = 'Lebih banyak';
+    }
+}
+lucide.createIcons();
+</script>
+
+</body>
+</html>
