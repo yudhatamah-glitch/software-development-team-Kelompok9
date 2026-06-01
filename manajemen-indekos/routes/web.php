@@ -28,16 +28,20 @@ Route::post('/login', function (Request $request) {
     $credentials = $request->only('username', 'password');
 
     if (Auth::attempt($credentials)) {
+
         $request->session()->regenerate();
 
-        return redirect('/admin');
+        if (Auth::user()->role == 'admin') {
+            return redirect('/admin');
+        }
+
+        return redirect('/penghuni/dashboard');
     }
 
     return back()->withErrors([
         'username' => 'username atau password salah',
     ]);
 });
-
 
 /*
 |--------------------------------------------------------------------------
