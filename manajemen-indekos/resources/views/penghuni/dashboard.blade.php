@@ -110,10 +110,20 @@
 {{-- Content --}}
 <div style="max-width:720px;margin:0 auto;padding:28px 20px;position:relative;z-index:1;">
 
-    {{-- Greeting --}}
-    <div class="fade-up" style="margin-bottom:22px;">
-        <h1 style="font-size:21px;font-weight:800;color:#1e1b4b;margin-bottom:2px;">Halo, {{ session('nama') ?? 'Rekan-rekan' }} 👋</h1>
-        <p style="font-size:13px;color:#9ca3af;">Ini Dashboard sewa kamar kamu</p>
+    {{-- Greeting + Tombol --}}
+    <div class="flex justify-between items-end mb-6 fade-up">
+        <div>
+            <h1 style="font-size:21px;font-weight:800;color:#1e1b4b;margin-bottom:2px;">Halo, {{ session('nama') ?? 'Rekan-rekan' }} 👋</h1>
+            <p style="font-size:13px;color:#9ca3af;">Ini Dashboard sewa kamar kamu</p>
+        </div>
+        
+        <a href="{{ route('barang.create') }}" 
+           class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+            </svg>
+            Tambah Barang
+        </a>
     </div>
 
     {{-- Info Kos --}}

@@ -88,11 +88,25 @@ Route::prefix('admin')->group(function () {
 Route::prefix('penghuni')->group(function () {
 
     Route::get('/dashboard', function () {
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        // Set session yang dibutuhkan
+        session([
+            'nama'      => $user->nama ?? 'Penghuni',
+            'kamar_id'  => $user->kamar_id ?? 1,   // Ambil dari user yang login
+        ]);
+
         return view('penghuni.dashboard');
-    });
+    })->name('penghuni.dashboard');
+
+    // === ROUTE TAMBAH BARANG ===
+    Route::get('/tambah-barang', [App\Http\Controllers\BarangController::class, 'create'])
+         ->name('barang.create');
+
+    Route::post('/tambah-barang', [App\Http\Controllers\BarangController::class, 'store'])
+         ->name('barang.store');
 
 });
-
 
 /*
 |--------------------------------------------------------------------------
