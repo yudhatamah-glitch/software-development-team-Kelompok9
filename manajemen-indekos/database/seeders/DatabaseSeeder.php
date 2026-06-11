@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => 'admin',
-            'password' => Hash::make('123456'),
+            'password' => Hash::make('1'),
             'role'     => 'admin',
         ]);
 
@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username'    => 'budi',
-            'password'    => Hash::make('123456'),
+            'password'    => Hash::make('1'),
             'role'        => 'penghuni',
             'penghuni_id' => $penghuni->id
         ]);
