@@ -129,13 +129,23 @@
             <h1 style="font-size:22px;font-weight:800;color:#1e1b4b;">Pembayaran</h1>
             <p style="font-size:13px;color:#9ca3af;margin-top:3px;">Monitoring pembayaran sewa penghuni kos</p>
         </div>
-        <div style="position:relative;">
-            <svg fill="none" stroke="#9ca3af" viewBox="0 0 24 24" width="15" height="15"
-                 style="position:absolute;left:11px;top:50%;transform:translateY(-50%);pointer-events:none;">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z"/>
-            </svg>
-            <input type="text" placeholder="Cari penghuni..."
-                   class="search-input" id="searchInput" onkeyup="searchTable()">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <a href="/admin/pembayaran/tambah"
+               style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:linear-gradient(135deg,#6366f1,#818cf8);color:white;border-radius:12px;font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 4px 12px rgba(99,102,241,0.25);transition:opacity 0.2s;"
+               onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="15" height="15">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                </svg>
+                Tambah Pembayaran
+            </a>
+            <div style="position:relative;">
+                <svg fill="none" stroke="#9ca3af" viewBox="0 0 24 24" width="15" height="15"
+                     style="position:absolute;left:11px;top:50%;transform:translateY(-50%);pointer-events:none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z"/>
+                </svg>
+                <input type="text" placeholder="Cari penghuni..."
+                       class="search-input" id="searchInput" onkeyup="searchTable()">
+            </div>
         </div>
     </div>
 

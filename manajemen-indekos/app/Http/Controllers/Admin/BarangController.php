@@ -110,4 +110,17 @@ class BarangController extends Controller
         return back()
             ->with('success', 'Barang berhasil dihapus');
     }
+
+    /*
+|--------------------------------------------------------------------------
+| TANDAI LAPORAN RUSAK SELESAI
+|--------------------------------------------------------------------------
+*/
+    public function selesai($id)
+    {
+        $barang = Barang::findOrFail($id);
+        $barang->update(['kondisi' => 'Selesai']);
+
+        return back()->with('success', 'Laporan berhasil ditandai selesai.');
+    }
 }

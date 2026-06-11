@@ -117,13 +117,13 @@
             <p style="font-size:13px;color:#9ca3af;">Ini Dashboard sewa kamar kamu</p>
         </div>
         
-        <a href="{{ route('barang.create') }}" 
-           class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
-            </svg>
-            Tambah Barang
-        </a>
+        <a href="{{ route('penghuni.lapor_barang') }}" 
+   class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+    </svg>
+    Lapor Barang Rusak
+</a>
     </div>
 
     {{-- Info Kos --}}
