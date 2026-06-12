@@ -8,5 +8,5 @@ Nama Anggota :
 Mata Kuliah : Sofware Development
 
 Deskripsi Repository: 
-Repository ini dibuat untuk memenuhi tugas praktikum mata kuliah Data Mining
+Repository ini dibuat untuk memenuhi tugas praktikum mata kuliah Sofware Development
 Repository ini berisi file dataset tugas kelomppok yang akan diberikan.
