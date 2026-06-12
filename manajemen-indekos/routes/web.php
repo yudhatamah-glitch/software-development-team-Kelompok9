@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\PembayaranController;
+use App\Http\Controllers\Admin\BarangController;
+use App\Http\Controllers\LaporBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +16,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 /*
 |--------------------------------------------------------------------------
-| LOGIN ADMIN
+| LOGIN
 |--------------------------------------------------------------------------
 */
 Route::get('/login', function () {
@@ -50,33 +52,37 @@ Route::post('/login', function (Request $request) {
 */
 Route::prefix('admin')->group(function () {
 
+    // Dashboard
     Route::get('/', function () {
         return view('admin.dashboard');
     });
 
+    // Barang — tab tambah & laporan rusak
     Route::get('/barang', function () {
         return view('admin.barang');
     });
-
-    Route::get('/tambah', function () {
-        return view('admin.tambah_barang');
+    Route::post('/tambah', function () {
+        // backend isi nanti
     });
+    Route::patch('/barang/selesai/{id}', [BarangController::class, 'selesai']);
 
+    // Kamar
     Route::get('/kamar', function () {
         return view('admin.kamar');
     });
 
+    // Penghuni
     Route::get('/penghuni', function () {
         return view('admin.penghuni');
     });
-
     Route::get('/tambah_penghuni', function () {
         return view('admin.tambah_penghuni');
     });
 
-    Route::get('/pembayaran', function () {
-        return view('admin.pembayaran');
-    });
+    // Pembayaran
+    Route::get('/pembayaran',        [PembayaranController::class, 'index']);
+    Route::get('/pembayaran/tambah', [PembayaranController::class, 'create']);
+    Route::post('/pembayaran/simpan',[PembayaranController::class, 'store']);
 
 });
 
@@ -87,12 +93,21 @@ Route::prefix('admin')->group(function () {
 */
 Route::prefix('penghuni')->group(function () {
 
+    // Dashboard
     Route::get('/dashboard', function () {
+        $user = Auth::user();
+        session([
+            'nama'     => $user->nama ?? 'Penghuni',
+            'kamar_id' => $user->kamar_id ?? 1,
+        ]);
         return view('penghuni.dashboard');
-    });
+    })->name('penghuni.dashboard');
+
+    // Lapor barang rusak (ganti tambah-barang)
+    Route::get('/lapor-barang',  [LaporBarangController::class, 'create'])->name('penghuni.lapor_barang');
+    Route::post('/lapor-barang', [LaporBarangController::class, 'store'])->name('penghuni.lapor_barang.store');
 
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -101,10 +116,7 @@ Route::prefix('penghuni')->group(function () {
 */
 Route::post('/logout', function (Request $request) {
     Auth::logout();
-
     $request->session()->invalidate();
     $request->session()->regenerateToken();
-
     return redirect('/');
-    
 })->name('logout');

@@ -7,10 +7,7 @@
 <style>
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-    .page-wrap {
-        padding: 28px 28px 28px 72px;
-        max-width: 680px;
-    }
+    .page-wrap { padding: 28px; max-width: 1000px; margin: 0 auto; }
 
     .form-card {
         background: #ffffff;

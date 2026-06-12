@@ -7,11 +7,7 @@
 <style>
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-    .page-wrap {
-        padding: 28px;
-        max-width: 860px;
-        margin: 0 auto;
-    }
+    .page-wrap { padding: 28px; max-width: 1000px; margin: 0 auto; }
 
     .card {
         background: #ffffff;
